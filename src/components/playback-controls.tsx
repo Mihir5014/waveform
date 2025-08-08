@@ -4,15 +4,20 @@ import { Pause, SkipForward, SkipBack, Shuffle, Repeat, Play } from 'lucide-reac
 
 import { songs, Song, Playlist, playlist } from '@/data/song'
 import { cn } from '@/lib/utils'
-
-const PlaybackControls = () => {
+type Props = {
+  isPaused: boolean
+  setIsPaused: React.Dispatch<React.SetStateAction<boolean>>
+  playingSong: Song | null
+}
+const PlaybackControls = ({isPaused, setIsPaused, playingSong}: Props) => {
   const [mode, setMode] = useState<'repeat' | 'shuffle' | 'none'>('none')
   const isShuffleOn = mode === 'shuffle'
   const isRepeatOn = mode === 'repeat'
-  const isPaused = true
+  // const isPaused = true
 
-  const changeTrack = (action: 'next' | 'prev') => {}
-  const onPlayPause = () => {}
+  const changeTrack = (action: 'next' | 'prev') => { }
+  // const onPlayPause = () => {}
+  
 
   return (
     <>
@@ -28,7 +33,7 @@ const PlaybackControls = () => {
       <ButtonContainer onClick={() => changeTrack('prev')} className='col-start-6 row-start-7'>
         <SkipBack fill='currentColor' className='justify-self-center self-center' size={30} strokeWidth={1} absoluteStrokeWidth />
       </ButtonContainer>
-      <ButtonContainer onClick={onPlayPause} className='row-span-2 col-start-5 row-start-6'>
+      <ButtonContainer onClick={()=> {if(playingSong) setIsPaused(prev => !prev)}} className='row-span-2 col-start-5 row-start-6'>
         {!isPaused ? <Pause fill='currentColor' className='justify-self-center self-center' size={50} strokeWidth={1} absoluteStrokeWidth /> : <Play fill='currentColor' className='justify-self-center self-center' size={50} strokeWidth={1} absoluteStrokeWidth />}
       </ButtonContainer>
     </>

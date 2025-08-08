@@ -1,10 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { songs, Song, Playlist, playlist } from '@/data/song'
 
-export default function AudioWaveform() {
-  const isPlaying = false
-  const isPaused = false
+export default function AudioWaveform({isPaused, playingSong}: {isPaused:boolean, playingSong: Song | null}) {
+  // const isPlaying = false 
+  const isPlaying = playingSong
+  // const isPaused = false
   const [bars, setBars] = useState<{ positive: number; negative: number }[]>([])
 
   useEffect(() => {

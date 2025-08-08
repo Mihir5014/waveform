@@ -4,13 +4,26 @@ import Image from 'next/image'
 
 import { Play } from 'lucide-react'
 
-import { songs, Song, Playlist } from '@/data/song'
+import { songs, Song, Playlist, playlist } from '@/data/song'
 import { cn } from '@/lib/utils'
 
-const Tracks = () => {
-  const playingSong = {}
-  const tracks = songs
-  const playSong = (track: Song) => {}
+interface TracksProps {
+  currentPlayList: Playlist
+  playingSong: Song | null
+  setPlayingSong: React.Dispatch<React.SetStateAction<Song|null>>
+  setIsPaused: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Tracks = ({ currentPlayList, playingSong, setPlayingSong, setIsPaused }: TracksProps) => {
+  // const playingSong = {}
+  // const tracks = songs
+  const tracks = songs.filter(song => currentPlayList.tracks.includes(song.id))
+  
+  const playSong = (track: Song) => {
+    setPlayingSong(track)
+    setIsPaused(false)
+  }
+
   return (
     <div className='col-span-6 row-span-5 col-start-1 row-start-8 bg-black p-4'>
       <h1 className='mb-2'>Tracks in the playlist</h1>
