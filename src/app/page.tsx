@@ -25,7 +25,7 @@ export default function Home() {
           <Tracks currentPlayList={currentPlayList} playingSong={playingSong} setPlayingSong={setPlayingSong} setIsPaused={setIsPaused} />
           <AlbumCover playingSong={playingSong} />
           <PlayerMain playingSong={playingSong} />
-          <AboutArtist />
+          <AboutArtist playingSong={playingSong} />
           <PlaybackControls isPaused={isPaused} setIsPaused={setIsPaused} playingSong={playingSong} setPlayingSong={setPlayingSong} currentPlayList={currentPlayList} setPlaylist={setPlaylist} />
         </div>
       </main>

@@ -2,9 +2,10 @@ import React from 'react'
 import { Song } from '@/data/song'
 import { artists } from '@/data/artists'
 
-const AboutArtist = () => {
-  const playingSong = {}
-  const artist = {}
+const AboutArtist = ({ playingSong }: { playingSong: Song | null }) => {
+  // artist from song 
+  const artist = artists.find(a => a.name === playingSong?.artist)
+
   if (!playingSong) return <div className='col-span-6 row-span-3 col-start-7 row-start-10 bg-black p-4'></div>
   return (
     <div className='col-span-6 row-span-3 col-start-7 row-start-10 bg-black p-4'>
