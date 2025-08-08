@@ -26,48 +26,63 @@ const PlaybackControls = ({ isPaused, setIsPaused, playingSong, setPlayingSong, 
     let newSong: Song | null = null
     let newPlaylist = currentPlayList
 
-    if (action === 'next') {
-      // play next song of same playlist
-      if (currentSongIndex < currentSongs.length - 1) {
-        newSong = currentSongs[currentSongIndex + 1]
-      } else {
-        // Move to first song of next playlist
-        // current playlist index of song
-        const currentPlaylistIndex = playlist.findIndex(p => p.id === currentPlayList.id)
-
-        let nextPlaylistIndex
-
-        if (currentPlaylistIndex === playlist.length - 1) {
-          nextPlaylistIndex = 0 // move to the first playlist
-        } else {
-          nextPlaylistIndex = currentPlaylistIndex + 1
-        }
-
-        newPlaylist = playlist[nextPlaylistIndex]
-        const nextSongs = songs.filter(song => newPlaylist.tracks.includes(song.id))
-        newSong = nextSongs[0] || null
-      }
+    if (mode === 'shuffle') {
+      const random = Math.floor(Math.random() * currentSongs.length)
+      newSong = currentSongs[random]
     }
+    else {
 
-    if (action === 'prev') {
-      if (currentSongIndex > 0) {
-        // Play previous song in playlist
-        newSong = currentSongs[currentSongIndex - 1]
-      } else {
-        // Move to last song playlist
-        const currentPlaylistIndex = playlist.findIndex(p => p.id === currentPlayList.id)
-
-        let prevPlaylistIndex
-
-        if (currentPlaylistIndex === 0) {
-          prevPlaylistIndex = playlist.length - 1 // move to last playlist
+      if (action === 'next') {
+        // play next song of same playlist
+        if (currentSongIndex < currentSongs.length - 1) {
+          newSong = currentSongs[currentSongIndex + 1]
         } else {
-          prevPlaylistIndex = currentPlaylistIndex - 1
-        }
+          if (mode === 'repeat') {
+            newSong = currentSongs[0];
+          } else {
+            // Move to first song of next playlist
+            // current playlist indx of song
+            const currentPlaylistIndex = playlist.findIndex(p => p.id === currentPlayList.id)
 
-        newPlaylist = playlist[prevPlaylistIndex]
-        const prevTracks = songs.filter(song => newPlaylist.tracks.includes(song.id))
-        newSong = prevTracks[prevTracks.length - 1] || null
+            let nextPlaylistIndex
+
+            if (currentPlaylistIndex === playlist.length - 1) {
+              nextPlaylistIndex = 0 // move to the first playlist
+            } else {
+              nextPlaylistIndex = currentPlaylistIndex + 1
+            }
+
+            newPlaylist = playlist[nextPlaylistIndex]
+            const nextSongs = songs.filter(song => newPlaylist.tracks.includes(song.id))
+            newSong = nextSongs[0] || null
+          }
+        }
+      }
+
+      if (action === 'prev') {
+        if (currentSongIndex > 0) {
+          // Play previous song in playlist
+          newSong = currentSongs[currentSongIndex - 1]
+        } else {
+          if (mode === 'repeat') {
+            newSong = currentSongs[currentSongs.length - 1]
+          } else {
+            // Move to last song playlist
+            const currentPlaylistIndex = playlist.findIndex(p => p.id === currentPlayList.id)
+
+            let prevPlaylistIndex
+
+            if (currentPlaylistIndex === 0) {
+              prevPlaylistIndex = playlist.length - 1 // move to last playlist
+            } else {
+              prevPlaylistIndex = currentPlaylistIndex - 1
+            }
+
+            newPlaylist = playlist[prevPlaylistIndex]
+            const prevTracks = songs.filter(song => newPlaylist.tracks.includes(song.id))
+            newSong = prevTracks[prevTracks.length - 1] || null
+          }
+        }
       }
     }
 

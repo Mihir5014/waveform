@@ -12,8 +12,7 @@ const PlayerMain = ({ playingSong }: { playingSong: Song | null }) => {
   const handleLike = () => { 
     setIsLiked(prev => !prev);
   }
-  // const isLiked = false
-  // const playingSong = {}
+ 
   if (!playingSong) return <div className='col-span-6 row-span-9 col-start-7 row-start-1 bg-black p-4'></div>
   return (
     <div className='col-span-6 row-span-9 col-start-7 row-start-1 bg-black p-4'>

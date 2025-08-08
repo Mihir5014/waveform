@@ -15,9 +15,7 @@ type Props = {
 }
 
 const Tracks = ({ currentPlayList, playingSong, setPlayingSong, setIsPaused }: Props) => {
-  // const playingSong = {}
-  // const tracks = songs
-  // filtering according playlist
+
   const tracks = songs.filter(song => currentPlayList.tracks.includes(song.id))
   
   const playSong = (track: Song) => {
