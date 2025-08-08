@@ -7,16 +7,17 @@ import { Play } from 'lucide-react'
 import { songs, Song, Playlist, playlist } from '@/data/song'
 import { cn } from '@/lib/utils'
 
-interface TracksProps {
+type Props = {
   currentPlayList: Playlist
   playingSong: Song | null
   setPlayingSong: React.Dispatch<React.SetStateAction<Song|null>>
   setIsPaused: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Tracks = ({ currentPlayList, playingSong, setPlayingSong, setIsPaused }: TracksProps) => {
+const Tracks = ({ currentPlayList, playingSong, setPlayingSong, setIsPaused }: Props) => {
   // const playingSong = {}
   // const tracks = songs
+  // filtering according playlist
   const tracks = songs.filter(song => currentPlayList.tracks.includes(song.id))
   
   const playSong = (track: Song) => {

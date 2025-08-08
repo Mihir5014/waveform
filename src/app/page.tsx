@@ -24,9 +24,9 @@ export default function Home() {
           <AudioWaveform isPaused={isPaused} playingSong={playingSong} />
           <Tracks currentPlayList={currentPlayList} playingSong={playingSong} setPlayingSong={setPlayingSong} setIsPaused={setIsPaused} />
           <AlbumCover playingSong={playingSong} />
-          <PlayerMain />
+          <PlayerMain playingSong={playingSong} />
           <AboutArtist />
-          <PlaybackControls isPaused={isPaused} setIsPaused={setIsPaused} playingSong={playingSong} />
+          <PlaybackControls isPaused={isPaused} setIsPaused={setIsPaused} playingSong={playingSong} setPlayingSong={setPlayingSong} currentPlayList={currentPlayList} setPlaylist={setPlaylist} />
         </div>
       </main>
     </div>
